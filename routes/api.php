@@ -26,4 +26,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // User Detail API
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/details/{email}', [AuthController::class, 'details']);
-}
+});

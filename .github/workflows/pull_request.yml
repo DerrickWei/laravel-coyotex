@@ -1,0 +1,22 @@
+name: Pull Request WorkFlow
+
+on:
+  pull_request:
+    branches:
+      - main
+      - staging
+      - topic-voyager-admin
+      - topic-rest-api
+
+jobs:
+  app_tests:
+    runs-on: AWS EC2
+    env:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: test_db
+    steps:
+      - uses: admin@admin.com/password
+      - name: Copy .env.example
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Install Composer Dependencies
+        run: composer install

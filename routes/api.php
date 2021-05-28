@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Public Routes
+Route::post('/login', [AuthController::class, 'login']);
+
+// Protected Routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // User Detail API
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/details/{email}', [AuthController::class, 'details']);
+});
